@@ -45,8 +45,8 @@ BACKUP_DIR=$CUR_DIR/$MYSQL_DB"_"$tb"_"$(date +%Y-%m-%d-%H-%M-%S);
 #Check and create new directory if not exists
 $MYSQL_DB -d "$BACKUP_DIR" || mkdir -p "$BACKUP_DIR"
 
-  mysqldump  --host="$host"  --user="$MYSQL_USER" --password="$MYSQL_PASSWORD" "$MYSQL_DB" "$tb" --skip-lock-tables> "$BACKUP_DIR/$tb.sql"
-echo " ✅ mysqldump --host="$host" --user="$MYSQL_USER "--password="$MYSQL_PASSWORD $MYSQL_DB  $tb" --skip-lock-tables> "$BACKUP_DIR/$tb.sql
+  mysqldump  --host="$host"  --user="$MYSQL_USER" --password="$MYSQL_PASSWORD" "$MYSQL_DB" "$tb" --routines --skip-lock-tables> "$BACKUP_DIR/$tb.sql"
+echo " ✅ mysqldump --host="$host" --user="$MYSQL_USER "--password="$MYSQL_PASSWORD $MYSQL_DB  $tb" --routines --skip-lock-tables> "$BACKUP_DIR/$tb.sql
 
 chmod -R 777 "$BACKUP_DIR"
 echo "🚀🚀 🥳 Downloaded path 📂 :" $BACKUP_DIR
@@ -60,8 +60,8 @@ do
 
 echo "⚙️ Taking backup of Table : "$tb
   # backup each table in a separate file
-  mysqldump --host="$host" --user="$MYSQL_USER" --password="$MYSQL_PASSWORD" "$MYSQL_DB" "$tb" --skip-lock-tables> "$BACKUP_DIR/$tb.sql"
-echo " ✅  mysqldump --host="$host" --user="$MYSQL_USER "--password="$MYSQL_PASSWORD $MYSQL_DB $tb" --skip-lock-tables> "$BACKUP_DIR/$tb.sql
+  mysqldump --host="$host" --user="$MYSQL_USER" --password="$MYSQL_PASSWORD" "$MYSQL_DB" "$tb" --routines --skip-lock-tables> "$BACKUP_DIR/$tb.sql"
+echo " ✅  mysqldump --host="$host" --user="$MYSQL_USER "--password="$MYSQL_PASSWORD $MYSQL_DB $tb" --routines --skip-lock-tables> "$BACKUP_DIR/$tb.sql
 done
 chmod -R 777 "$BACKUP_DIR"
 echo "🚀🚀 🥳 Downloaded path 📂 :" $BACKUP_DIR
