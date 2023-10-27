@@ -18,7 +18,22 @@ set-php(){
 }
 
 all-pull(){
-  ls | xargs -P10 -I{} git -C {} pull --all
+    # ls | xargs -P10 -I{} git -C {} pull --all 
+
+    # ls | xargs -I{} sh -c 'echo "Fetching updates for repository: {}"; git -C {} pull --all'
+
+    # ls | xargs -P10 -I{} sh -c 'echo "Pulling changes in {}"; git -C {} pull --all'
+
+    # ls -d */ | xargs -P10 -I{} sh -c 'echo "Updating repository: {}" && git -C {} pull --all'
+
+    for dir in */; do
+        # echo "Fetching updates for repository" $dir
+        current_branch=$(git -C "$dir" branch --show-current)
+        echo "Current branch in $dir repository is: $current_branch"
+        # git -C "$dir" branch --show-current
+        git -C "$dir" pull --all
+    done
+ 
 }
 
 get-all(){
