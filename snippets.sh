@@ -19,11 +19,8 @@ set-php(){
 
 all-pull(){
     # ls | xargs -P10 -I{} git -C {} pull --all 
-
     # ls | xargs -I{} sh -c 'echo "Fetching updates for repository: {}"; git -C {} pull --all'
-
     # ls | xargs -P10 -I{} sh -c 'echo "Pulling changes in {}"; git -C {} pull --all'
-
     # ls -d */ | xargs -P10 -I{} sh -c 'echo "Updating repository: {}" && git -C {} pull --all'
 
     for dir in */; do
@@ -52,3 +49,13 @@ get-count(){
     git branch | wc -l
 }
 alias tmux='tmux -u'
+
+
+all-pulls(){
+    parallel -j10 --line-buffer 'current_branch=$(git -C {} branch --show-current); echo "Current branch in {} repository is: $current_branch"; git -C {} pull --all' ::: */
+}
+all-pull-v1(){
+    ls | xargs -P10 -I{} git -C {} pull --all 
+}
+
+    
