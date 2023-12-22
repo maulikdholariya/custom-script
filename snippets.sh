@@ -63,7 +63,7 @@ load-ssh(){
         if grep -q PRIVATE "$possiblekey"; then
             # echo "$possiblekey"
             ssh-add "$possiblekey"
-        else
+        # else
             # echo "$possiblekey not added"
         fi
     done
