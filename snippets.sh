@@ -5,12 +5,6 @@ clear-ram(){
     echo "clear";
 }
 
-ssh-test(){
-    ssh-agent bash;
-    ssh-add /home/test/.ssh/id;
-    echo "ssh-test run"
-}
-
 set-php(){
     sudo update-alternatives --set php /usr/bin/php$1;
     sudo update-alternatives --set phar /usr/bin/phar$1;
