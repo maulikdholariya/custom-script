@@ -58,4 +58,15 @@ all-pull-v1(){
     ls | xargs -P10 -I{} git -C {} pull --all 
 }
 
+load-ssh(){
+    for possiblekey in ${HOME}/.ssh/*; do
+        if grep -q PRIVATE "$possiblekey"; then
+            # echo "$possiblekey"
+            ssh-add "$possiblekey"
+        else
+            # echo "$possiblekey not added"
+        fi
+    done
+}
+
     
