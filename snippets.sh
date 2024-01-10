@@ -54,9 +54,10 @@ all-pull-v1(){
 }
 
 load-ssh(){
+     ssh-agent bash;
     for possiblekey in ${HOME}/.ssh/*; do
         if grep -q PRIVATE "$possiblekey"; then
-            # echo "$possiblekey"
+            echo "$possiblekey"
             ssh-add "$possiblekey"
         # else
             # echo "$possiblekey not added"
