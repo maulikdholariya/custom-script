@@ -68,6 +68,7 @@ check_git_user() {
   if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
     # If inside a Git repository, display the Git username
     echo "Git Username: $(git config user.name)"
+    echo "Git Email: $(git config user.email)"
   fi
 }
 cd() {
