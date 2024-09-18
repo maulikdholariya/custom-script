@@ -64,5 +64,20 @@ load-ssh(){
         fi
     done
 }
+
+cd() {
+  builtin cd "$@" && \
+  if [ -f .nvmrc ]; then
+    CURRENT_VERSION=$(nvm current)
+    nvm use > /dev/null 2>&1
+    NEW_VERSION=$(nvm current)
+    if [ "$CURRENT_VERSION" != "$NEW_VERSION" ]; then
+      echo "Now using node $(nvm current)"
+    fi
+  else
+    nvm use default > /dev/null 2>&1
+  fi
+}
+
 #load-ssh
     
