@@ -64,7 +64,12 @@ load-ssh(){
         fi
     done
 }
-
+check_git_user() {
+  if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    # If inside a Git repository, display the Git username
+    echo "Git Username: $(git config user.name)"
+  fi
+}
 cd() {
   builtin cd "$@" && \
   if [ -f .nvmrc ]; then
@@ -77,6 +82,9 @@ cd() {
   else
     nvm use default > /dev/null 2>&1
   fi
+  check_git_user
 }
+
+
 #load-ssh
     
