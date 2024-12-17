@@ -85,6 +85,36 @@ cd() {
   fi
   check_git_user
 }
+db(){
+for file in  ${HOME}/sql/*.sql; do
+    mysql -u root -proot gamechanger < "$file"
+done
+}
+
+reset-2-trial(){
+#WebStorm DataGrip PhpStorm CLion PyCharm GoLand RubyMine
+    for product in IntelliJIdea PhpStorm; do
+        echo "[+] Resetting trial period for $product"
+
+        echo "[+] Removing Evaluation Key..."
+        rm -rf ~/.config/$product*/eval 2> /dev/null
+
+        # Above path not working on latest version, Fixed below
+        rm -rf ~/.config/JetBrains/$product*/eval 2> /dev/null
+
+        echo "[+] Removing all evlsprt properties in options.xml..."
+        sed -i 's/evlsprt//' ~/.config/$product*/options/other.xml 2> /dev/null
+
+        # Above path not working on latest version, Fixed below
+        sed -i 's/evlsprt//' ~/.config/JetBrains/$product*/options/other.xml 2> /dev/null
+
+        echo
+    done
+
+    echo "Removing userPrefs files..."
+    rm -rf ~/.java/.userPrefs 2> /dev/null
+}
+
 
 
 #load-ssh
